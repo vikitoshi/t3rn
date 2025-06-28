@@ -3,43 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERN Checker</title>
+    <title>T3RN Checker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; 
-            background-image: radial-gradient(#d3e3f0 1px, transparent 1px), radial-gradient(#d3e3f0 1px, transparent 1px);
+            background-color: #e2e8f0; 
+            background-image: radial-gradient(circle at center, #f8fafc 1px, transparent 1px),
+                              radial-gradient(circle at center, #f8fafc 1px, transparent 1px);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem; 
+            overflow-x: hidden; 
         }
 
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #3b82f6; 
+            border-left-color: #4f46e5; 
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
+            width: 28px; 
+            height: 28px;
+            animation: spin 0.8s linear infinite; 
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg transform transition-all duration-300 hover:scale-[1.01]">
-        <h1 class="text-4xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-                TERN Checker
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-lg transform transition-all duration-300 hover:scale-[1.01] border border-gray-100 backdrop-filter backdrop-blur-sm bg-opacity-90">
+        <h1 class="text-5xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 animate-pulse">
+                T3RN Checker
             </span>
         </h1>
 
-        <div class="mb-6">
-            <label for="ethAddress" class="block text-gray-700 text-base font-medium mb-2">
+        <div class="mb-7">
+            <label for="ethAddress" class="block text-gray-700 text-lg font-medium mb-2">
                 Ethereum Address:
             </label>
             <div class="relative flex items-center">
@@ -47,68 +69,121 @@
                     type="text"
                     id="ethAddress"
                     placeholder="Enter Ethereum address (e.g., 0x...)"
-                    class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-3 focus:ring-blue-400 focus:border-transparent text-gray-800 transition-all duration-200"
+                    class="w-full pl-5 pr-14 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-500 text-gray-800 transition-all duration-300 placeholder-gray-400 text-base shadow-sm"
                 />
                 <button
                     id="copyAddressButton"
-                    class="absolute right-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+                    class="absolute right-2.5 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 shadow-sm text-gray-600 hover:text-gray-800"
                     title="Copy Address"
                 >
-                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
                     </svg>
                 </button>
             </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <div class="flex flex-col sm:flex-row gap-5 mb-7">
             <button
                 id="checkButton"
-                class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 shadow-md"
+                class="flex-1 bg-gradient-to-r from-blue-700 to-indigo-700 text-white py-3.5 rounded-xl font-bold text-lg hover:from-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-3 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
             >
                 Check TERN Data
             </button>
             <button
                 id="clearButton"
-                class="flex-1 bg-gray-200 text-gray-800 py-3 rounded-xl font-semibold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors duration-200 shadow-sm"
+                class="flex-1 bg-gray-200 text-gray-800 py-3.5 rounded-xl font-bold text-lg hover:bg-gray-300 focus:outline-none focus:ring-3 focus:ring-gray-400 focus:ring-offset-2 transition-colors duration-200 shadow-md"
             >
                 Clear
             </button>
         </div>
 
-        <div id="loadingIndicator" class="hidden flex items-center justify-center mt-4 text-blue-600 font-medium space-x-2">
+        <div id="loadingIndicator" class="hidden flex items-center justify-center mt-6 text-indigo-600 font-semibold space-x-3">
             <div class="spinner"></div>
-            <span>Loading...</span>
+            <span>Loading Data...</span>
         </div>
 
-        <div id="errorMessage" class="hidden text-center mt-4 p-3 rounded-xl bg-red-100 border border-red-400 text-red-700 font-medium transition-all duration-300">
+        <div id="errorMessage" class="hidden text-center mt-6 p-4 rounded-xl bg-red-50 border border-red-300 text-red-700 font-medium transition-all duration-300 text-base shadow-sm">
         </div>
 
-        <div id="copySuccessMessage" class="hidden text-center mt-4 p-3 rounded-xl bg-green-100 border border-green-400 text-green-700 font-medium transition-all duration-300">
-            Address copied!
+        <div id="copySuccessMessage" class="hidden text-center mt-6 p-4 rounded-xl bg-green-50 border border-green-300 text-green-700 font-medium transition-all duration-300 text-base shadow-sm">
+            Address copied successfully!
         </div>
 
-        <div id="results" class="mt-8 border-t border-gray-200 pt-6 hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-5">Results:</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                <p><span class="font-semibold">Total BRN:</span> <span id="totalBrn" class="text-gray-900 font-mono text-lg"></span></p>
-                <p><span class="font-semibold">Classification:</span> <span id="classification" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">Eligible:</span> <span id="eligible" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">Category:</span> <span id="category" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">V2 User:</span> <span id="v2User" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">V1 Executor:</span> <span id="v1Executor" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">V2 Executor:</span> <span id="v2Executor" class="text-gray-900 text-lg"></span></p>
-                <p><span class="font-semibold">Passport Score:</span> <span id="passportScore" class="text-gray-900 font-mono text-lg"></span></p>
-                <p><span class="font-semibold">Passing Score:</span> <span id="passingScore" class="text-gray-900 text-lg"></span></p>
+        <div id="results" class="mt-10 border-t border-gray-200 pt-7 hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3 border-indigo-100">Results:</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4 text-gray-700">
+                <p><span class="font-semibold text-gray-800">Total BRN:</span> <span id="totalBrn" class="text-gray-900 font-mono text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">Classification:</span> <span id="classification" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">Eligible:</span> <span id="eligible" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">Category:</span> <span id="category" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">V2 User:</span> <span id="v2User" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">V1 Executor:</span> <span id="v1Executor" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">V2 Executor:</span> <span id="v2Executor" class="text-gray-900 text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">Passport Score:</span> <span id="passportScore" class="text-gray-900 font-mono text-lg ml-2"></span></p>
+                <p><span class="font-semibold text-gray-800">Passing Score:</span> <span id="passingScore" class="text-gray-900 text-lg ml-2"></span></p>
             </div>
-            <div class="mt-5 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <span class="font-semibold text-gray-700">Reason:</span> <span id="reason" class="text-gray-800 italic"></span>
+            <div class="mt-6 p-5 bg-blue-50 rounded-xl border border-blue-200 shadow-sm">
+                <span class="font-semibold text-blue-700">Reason:</span> <span id="reason" class="text-blue-800 italic ml-2"></span>
+                <p class="mt-2 text-blue-700" id="classificationExplanation"></p>
             </div>
         </div>
 
-        <footer class="mt-8 pt-6 border-t border-gray-200 text-center text-gray-600 text-sm">
-            Join our Telegram Channel:
-            <a href="https://t.me/AirdropInsiderID" target="_blank" class="text-blue-600 hover:underline font-medium">AirdropInsiderID</a>
+        <div class="mt-10 pt-6 border-t border-gray-200">
+            <details class="group">
+                <summary class="flex justify-between items-center cursor-pointer text-xl font-bold text-gray-800 hover:text-indigo-700 transition-colors duration-200">
+                    Understanding TERN Ecosystem Wallets
+                    <span class="transform transition-transform duration-200 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </summary>
+                <div class="mt-4 p-5 bg-gray-50 rounded-xl border border-gray-200 text-gray-700 leading-relaxed shadow-inner">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">The Findings: A Clear Picture of Our Ecosystem</h3>
+                    <p class="mb-4">After analysing all 185,480 wallets that engaged with our testnet, we placed each into a distinct category based on behavioural patterns and onchain data. This gave us a transparent, structured approach to reward distribution. It protects real contributors and gives uncertain cases a fair path forward.</p>
+
+                    <h4 class="text-md font-semibold text-gray-700 mb-1">Human</h4>
+                    <p class="mb-3">These wallets passed all legitimacy checks. They were either on verified human lists or showed consistent human-like behaviour across chains.</p>
+                    <p class="italic text-indigo-600 mb-4"><strong>What it means for you:</strong> Congratulations, you're fully whitelisted. No action is needed.</p>
+
+                    <h4 class="text-md font-semibold text-gray-700 mb-1">Farmers</h4>
+                    <p class="mb-3">This group includes small clusters of wallets, usually between 2 and 9. Some may belong to developers testing infrastructure or prospective Executors preparing for launch. To keep things fair, we applied a simple rule: Only the wallet with the highest BRN balance in each cluster is eligible to claim.</p>
+                    <p class="italic text-indigo-600 mb-4"><strong>What it means for you:</strong> You can use the top wallet in your cluster to claim.</p>
+
+                    <h4 class="text-md font-semibold text-gray-700 mb-1">Unknown</h4>
+                    <p class="mb-3">This is the largest group and likely contains many genuine but newer users. These wallets had low onchain activity, often just one or two actions, which meant we couldn't confidently judge them.</p>
+                    <p class="italic text-indigo-600 mb-4"><strong>What it means for you:</strong> You'll need to verify your identity through Human Passport to claim your tokens.</p>
+
+                    <h4 class="text-md font-semibold text-gray-700 mb-1">Suspected Sybil</h4>
+                    <p class="mb-3">These wallets showed multiple red flags such as mirrored behaviour or suspicious funding origins. However, the evidence wasn't definitive enough to exclude them outright.</p>
+                    <p class="italic text-indigo-600 mb-4"><strong>What it means for you:</strong> You still have a path to claim. Verification via Human Passport is required.</p>
+
+                    <h4 class="text-md font-semibold text-gray-700 mb-1">Sybil</h4>
+                    <p class="mb-3">This group was definitively identified as Sybil actors. These wallets showed signs of large-scale automation and orchestration, including simultaneous funding and robotic execution.</p>
+                    <p class="italic text-indigo-600 mb-4"><strong>What it means for you:</strong> These wallets are excluded from the airdrop, increasing value for verified users.</p>
+
+                    <p class="mt-4 text-sm text-gray-500 text-right">Source: <a href="https://x.com/t3rn_io/status/1936121942781600018" target="_blank" class="text-blue-500 hover:underline">Official TERN X Post</a></p>
+                </div>
+            </details>
+        </div>
+
+
+        <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-gray-600 text-sm">
+            <p class="mb-2">Join our Telegram channel: <a href="https://t.me/AirdropInsiderID" target="_blank" class="text-indigo-600 hover:underline font-medium">AirdropInsiderID</a></p>
+            <p class="mb-2 mt-4">t3rn Community:</p>
+            <div class="flex justify-center gap-4 mb-3">
+                <a href="https://discord.gg/gYGzwpPN" target="_blank" class="text-indigo-600 hover:underline font-medium flex items-center">
+                    <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.25 6.75H3.75C3.33579 6.75 3 7.08579 3 7.5V16.5C3 16.9142 3.33579 17.25 3.75 17.25H16.5L21 21V7.5C21 7.08579 20.6642 6.75 20.25 6.75ZM15 13.5H12V16.5H10.5V13.5H7.5V12H10.5V9H12V12H15V13.5Z"></path>
+                    </svg>
+                    Discord
+                </a>
+                <a href="https://x.com/t3rn_io" target="_blank" class="text-indigo-600 hover:underline font-medium flex items-center">
+                    <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18.901 1.153h3.684l-8.025 9.201 9.771 13.646h-8.077l-6.195-8.736-7.79 8.736h-3.693l8.601-9.922-8.56-11.925h8.172l5.441 7.643 6.643-7.643zm-2.923 18.067h2.247l-7.73-10.822-7.854 10.822h2.095l6.092-8.498 5.14 8.498z"></path>
+                    </svg>
+                    X (Twitter)
+                </a>
+            </div>
         </footer>
     </div>
 
@@ -122,6 +197,7 @@
             const errorMessage = document.getElementById('errorMessage');
             const copySuccessMessage = document.getElementById('copySuccessMessage');
             const resultsDiv = document.getElementById('results');
+            const classificationExplanation = document.getElementById('classificationExplanation');
 
             const showTemporaryMessage = (element, duration = 3000) => {
                 element.classList.remove('hidden');
@@ -130,15 +206,31 @@
                 }, duration);
             };
 
+            const getClassificationExplanation = (classification) => {
+                switch (classification) {
+                    case 'Human':
+                        return "These wallets passed all legitimacy checks. They were either on verified human lists or showed consistent human-like behaviour across chains. What it means for you: Congratulations, you're fully whitelisted. No action is needed.";
+                    case 'Farmers':
+                        return "This group includes small clusters of wallets, usually between 2 and 9. Some may belong to developers testing infrastructure or prospective Executors preparing for launch. To keep things fair, we applied a simple rule: Only the wallet with the highest BRN balance in each cluster is eligible to claim. What it means for you: You can use the top wallet in your cluster to claim.";
+                    case 'Unknown':
+                        return "This is the largest group and likely contains many genuine but newer users. These wallets had low onchain activity, often just one or two actions, which meant we couldn't confidently judge them. What it means for you: You'll need to verify your identity through Human Passport to claim your tokens.";
+                    case 'Suspected Sybil':
+                        return "These wallets showed multiple red flags such as mirrored behaviour or suspicious funding origins. However, the evidence wasn't definitive enough to exclude them outright. What it means for you: You still have a path to claim. Verification via Human Passport is required.";
+                    case 'Sybil':
+                        return "This group was definitively identified as Sybil actors. These wallets showed signs of large-scale automation and orchestration, including simultaneous funding and robotic execution. What it means for you: These wallets are excluded from the airdrop, increasing value for verified users.";
+                    default:
+                        return "No specific explanation available for this classification.";
+                }
+            };
+
             const displayResults = (data) => {
-                
                 const formatBooleanBadge = (value) => {
                     if (value === true) {
-                        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Yes</span>`;
+                        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 shadow-sm">Yes</span>`;
                     } else if (value === false) {
-                        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">No</span>`;
+                        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 shadow-sm">No</span>`;
                     }
-                    return 'N/A';
+                    return 'N/A'; 
                 };
 
                 document.getElementById('totalBrn').textContent = data.totalBrn !== undefined ? data.totalBrn.toFixed(4) : 'N/A';
@@ -150,15 +242,19 @@
                 document.getElementById('v1Executor').innerHTML = formatBooleanBadge(data.v1Executor);
                 document.getElementById('v2Executor').innerHTML = formatBooleanBadge(data.v2Executor);
                 document.getElementById('passportScore').textContent = data.passportScore !== undefined ? data.passportScore.toFixed(2) : 'N/A';
-                document.getElementById('passingScore').innerHTML = formatBooleanBadge(data.passingScore);
-                resultsDiv.classList.remove('hidden');
+                document.getElementById('passingScore').innerHTML = formatBooleanBadge(data.passingScore); 
+
+                classificationExplanation.textContent = getClassificationExplanation(data.classification);
+
+                resultsDiv.classList.remove('hidden'); 
             };
 
             const resetUI = () => {
-                resultsDiv.classList.add('hidden');
-                errorMessage.classList.add('hidden');
-                errorMessage.textContent = '';
+                resultsDiv.classList.add('hidden'); 
+                errorMessage.classList.add('hidden'); 
+                errorMessage.textContent = ''; 
                 copySuccessMessage.classList.add('hidden'); 
+                classificationExplanation.textContent = ''; 
             };
 
             checkButton.addEventListener('click', async () => {
@@ -172,7 +268,7 @@
                 }
 
                 if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
-                    errorMessage.textContent = 'Invalid Ethereum address format.';
+                    errorMessage.textContent = 'Invalid Ethereum address format. It should start with 0x and be 42 characters long.';
                     errorMessage.classList.remove('hidden');
                     return;
                 }
@@ -186,14 +282,14 @@
                     if (!response.ok) {
                         let errorDetail = `HTTP error! Status: ${response.status}`;
                         try {
-                            const errorJson = await response.json();
+                            const errorJson = await response.json(); 
                             if (errorJson && errorJson.reason) {
                                 errorDetail = errorJson.reason;
                             } else if (errorJson && errorJson.message) {
                                 errorDetail = errorJson.message;
                             }
                         } catch (parseError) {
-                           
+                            console.error('Failed to parse error response:', parseError);
                         }
                         throw new Error(`Failed to fetch data: ${errorDetail}`);
                     }
@@ -204,8 +300,7 @@
                         throw new Error(data.error);
                     }
 
-                    displayResults(data);
-
+                    displayResults(data); 
                 } catch (error) {
                     console.error('Error fetching TERN data:', error);
                     errorMessage.textContent = `Error: ${error.message}. Please try again or check the address.`;
@@ -216,27 +311,26 @@
             });
 
             clearButton.addEventListener('click', () => {
-                ethAddressInput.value = '';
-                resetUI();
+                ethAddressInput.value = ''; 
+                resetUI(); 
             });
 
             copyAddressButton.addEventListener('click', () => {
                 const address = ethAddressInput.value.trim();
                 if (address) {
-
                     const textarea = document.createElement('textarea');
                     textarea.value = address;
                     document.body.appendChild(textarea);
-                    textarea.select();
+                    textarea.select(); 
                     try {
-                        document.execCommand('copy');
-                        showTemporaryMessage(copySuccessMessage);
+                        document.execCommand('copy'); 
+                        showTemporaryMessage(copySuccessMessage); 
                     } catch (err) {
                         console.error('Failed to copy address:', err);
                         errorMessage.textContent = 'Failed to copy address.';
                         errorMessage.classList.remove('hidden');
                     }
-                    document.body.removeChild(textarea);
+                    document.body.removeChild(textarea); 
                 } else {
                     errorMessage.textContent = 'No address to copy.';
                     errorMessage.classList.remove('hidden');
